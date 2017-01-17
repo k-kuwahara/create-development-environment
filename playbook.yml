@@ -1,0 +1,13 @@
+---
+- name: Install MariaDB, Nginx, PHP-FPM, Git and Vim
+  hosts: 127.0.0.1
+  remote_user: vagrant
+  sudo: yes
+
+  roles:
+    - common
+    - mariadb
+    - nginx
+    - php-fpm
+    - git
+    - vim

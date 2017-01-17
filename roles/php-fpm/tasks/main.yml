@@ -1,0 +1,29 @@
+---
+- name: install remi repository
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-7.rpm state=present
+
+- name: install epel repository
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+
+- name: install webtatic repository
+  yum: name=https://mirror.webtatic.com/yum/el7/webtatic-release.rpm state=present
+
+- name: Install php-fpm and deps
+  yum: name={{ item }} state=present enablerepo=remi,epel,webtatic
+  with_items:
+  - php71w
+  - php71w-fpm
+  - php71w-enchant
+  - php71w-mbstring
+  - php71w-mysql
+  - php71w-mcrypt
+  - php71w-opcache
+  - php71w-xml
+
+- name: Disable default pool
+  command: mv /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.disabled creates=/etc/php-fpm.d/www.disabled
+  notify: restart php-fpm
+
+- name: Copy php-fpm configuration
+  template: src=default.conf dest=/etc/php-fpm.d/
+  notify: restart php-fpm

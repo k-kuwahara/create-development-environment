@@ -1,0 +1,44 @@
+- name: install middleware for installing git
+  sudo: yes
+  yum: name="{{item.name}}" enablerepo="{{item.repo}}" state=present
+  with_items:
+    - {name: curl-devel,    repo: remi}
+    - {name: expat-devel,   repo: remi}
+    - {name: gettext-devel, repo: remi}
+    - {name: openssl-devel, repo: remi}
+    - {name: zlib-devel,    repo: remi}
+    - {name: perl-ExtUtils-MakeMaker, repo: remi}
+
+- name: check exist git compress file
+  sudo: no
+  command: ls -l /home/vagrant/git-2.11.0.tar.gz
+  ignore_errors: True
+  register: result1
+
+- name: get git source file
+  sudo: no
+  command: chdir=/home/vagrant wget https://www.kernel.org/pub/software/scm/git/git-2.11.0.tar.gz
+  when: result1|failed
+
+- name: check exist git source file
+  sudo: no
+  command: ls -l /home/vagrant/git-2.11.0/
+  ignore_errors: True
+  register: result2
+
+- name: expand git source
+  sudo: no
+  command: chdir=/home/vagrant tar zxvf git-2.11.0.tar.gz
+  when: result2|failed
+
+- name: make git source
+  sudo: yes
+  command: chdir=/home/vagrant/git-2.11.0 make prefix=/usr/local all
+
+- name: install git
+  sudo: yes
+  command: chdir=/home/vagrant/git-2.11.0 make prefix=/usr/local install
+
+- name: copy .gitconfig
+  sudo: no
+  copy: src=.gitconfig dest=~/.gitconfig mode=664
