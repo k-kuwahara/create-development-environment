@@ -15,3 +15,12 @@ set noexpandtab
 autocmd FileType * setlocal formatoptions-=ro
 " 内容が変更されたら自動的に再読み込み
 set autoread
+" カーソルラインの強調
+set cursorline
+" undo機能の設定
+set undodir=$HOME/.vim/undodir
+set undofile
+" 行末の余分な空白の削除
+autocmd BufWritePre * :%s/\s\+$//ge
+" ファイルを開いた際に、前回終了時の行で起動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
