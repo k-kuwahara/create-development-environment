@@ -6,4 +6,9 @@
 - Git(2.11.0)
 - Vim(color: molokai)
 
-`Ansible` must be installed beforehand.
+<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> `Ansible` must be installed beforehand.
+
+```bash
+$ sudo yum install -y epel-release
+$ sudo yum install -h ansible
+```
