@@ -5,3 +5,5 @@
 - MariaDB
 - Git(2.11.0)
 - Vim(color: molokai)
+
+`Ansible` must be installed beforehand.
