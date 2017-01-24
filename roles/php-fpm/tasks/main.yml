@@ -15,6 +15,7 @@
   - php71w-fpm
   - php71w-enchant
   - php71w-mbstring
+  - php71w-cli
   - php71w-mysql
   - php71w-mcrypt
   - php71w-opcache
