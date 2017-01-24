@@ -1,5 +1,5 @@
 ---
-- name: Install MariaDB, Nginx, PHP-FPM, Git and Vim
+- name: Install MariaDB, Nginx, PHP-FPM, Git, Vim and dos2unix
   hosts: 127.0.0.1
   remote_user: vagrant
   sudo: yes
@@ -10,4 +10,5 @@
     - nginx
     - php-fpm
     - git
+    - dos2unix
     - vim
