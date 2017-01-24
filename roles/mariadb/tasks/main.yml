@@ -9,6 +9,7 @@
    - libselinux-python
    - libsemanage-python
 
+# Not required in development environment
 # - name: Configure SELinux to start mysql on any port
 #   seboolean: name=mysql_connect_any state=true persistent=yes
 
@@ -23,5 +24,6 @@
 - name: Start MariaDB Service
   service: name=mariadb state=started enabled=yes
 
-- name: insert firewalld rule
-  firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
+# Not required in development environment
+#- name: insert firewalld rule
+#  firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
