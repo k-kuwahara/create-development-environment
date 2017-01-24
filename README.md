@@ -10,5 +10,5 @@
 
 ```bash
 $ sudo yum install -y epel-release
-$ sudo yum install -h ansible
+$ sudo yum install -y ansible
 ```
